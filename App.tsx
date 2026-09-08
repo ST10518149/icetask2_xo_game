@@ -46,9 +46,26 @@ function GameScreen({ route }: any) {
 
   const contentFor = (v: number) => (v === 1 ? 'X' : v === 2 ? 'O' : '');
 
+  const checkWinner = (): number => {
+    const [b0, b1, b2, b3, b4, b5, b6, b7, b8] = blocks;
+    if (b0 > 0 && b0 === b1 && b1 === b2) return b0;
+    if (b3 > 0 && b3 === b4 && b4 === b5) return b3;
+    if (b6 > 0 && b6 === b7 && b7 === b8) return b6;
+    if (b0 > 0 && b0 === b3 && b3 === b6) return b0;
+    if (b1 > 0 && b1 === b4 && b4 === b7) return b1;
+    if (b2 > 0 && b2 === b5 && b5 === b8) return b2;
+    if (b0 > 0 && b0 === b4 && b4 === b8) return b0;
+    if (b2 > 0 && b2 === b4 && b4 === b6) return b2;
+    return 0;
+  };
+
+  const winner = checkWinner();
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{player1} vs. {player2}</Text>
+      {winner === 1 && <Text style={styles.title}>{player1} Wins!</Text>}
+      {winner === 2 && <Text style={styles.title}>{player2} Wins!</Text>}
       <View>
         <View style={styles.row}>
           <TouchableHighlight style={styles.cell} onPress={() => handlePress(0)}>
