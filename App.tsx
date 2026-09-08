@@ -32,24 +32,56 @@ function PlayerScreen({ navigation }: any) {
 
 function GameScreen({ route }: any) {
   const { player1, player2 } = route.params;
+  // Board state: 0 empty, 1 X, 2 O
+  const [blocks, setBlocks] = useState<number[]>(Array(9).fill(0));
+  const [player1Turn, setPlayer1Turn] = useState<boolean>(true);
+
+  const handlePress = (index: number) => {
+    if (blocks[index] !== 0) return;
+    const newBlocks = [...blocks];
+    newBlocks[index] = player1Turn ? 1 : 2;
+    setBlocks(newBlocks);
+    setPlayer1Turn(!player1Turn);
+  };
+
+  const contentFor = (v: number) => (v === 1 ? 'X' : v === 2 ? 'O' : '');
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{player1} vs. {player2}</Text>
       <View>
         <View style={styles.row}>
-          <TouchableHighlight style={styles.cell}><Text style={styles.cellText}></Text></TouchableHighlight>
-          <TouchableHighlight style={styles.cell}><Text style={styles.cellText}></Text></TouchableHighlight>
-          <TouchableHighlight style={styles.cell}><Text style={styles.cellText}></Text></TouchableHighlight>
+          <TouchableHighlight style={styles.cell} onPress={() => handlePress(0)}>
+            <Text style={styles.cellText}>{contentFor(blocks[0])}</Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.cell} onPress={() => handlePress(1)}>
+            <Text style={styles.cellText}>{contentFor(blocks[1])}</Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.cell} onPress={() => handlePress(2)}>
+            <Text style={styles.cellText}>{contentFor(blocks[2])}</Text>
+          </TouchableHighlight>
         </View>
         <View style={styles.row}>
-          <TouchableHighlight style={styles.cell}><Text style={styles.cellText}></Text></TouchableHighlight>
-          <TouchableHighlight style={styles.cell}><Text style={styles.cellText}></Text></TouchableHighlight>
-          <TouchableHighlight style={styles.cell}><Text style={styles.cellText}></Text></TouchableHighlight>
+          <TouchableHighlight style={styles.cell} onPress={() => handlePress(3)}>
+            <Text style={styles.cellText}>{contentFor(blocks[3])}</Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.cell} onPress={() => handlePress(4)}>
+            <Text style={styles.cellText}>{contentFor(blocks[4])}</Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.cell} onPress={() => handlePress(5)}>
+            <Text style={styles.cellText}>{contentFor(blocks[5])}</Text>
+          </TouchableHighlight>
         </View>
         <View style={styles.row}>
-          <TouchableHighlight style={styles.cell}><Text style={styles.cellText}></Text></TouchableHighlight>
-          <TouchableHighlight style={styles.cell}><Text style={styles.cellText}></Text></TouchableHighlight>
-          <TouchableHighlight style={styles.cell}><Text style={styles.cellText}></Text></TouchableHighlight>
+          <TouchableHighlight style={styles.cell} onPress={() => handlePress(6)}>
+            <Text style={styles.cellText}>{contentFor(blocks[6])}</Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.cell} onPress={() => handlePress(7)}>
+            <Text style={styles.cellText}>{contentFor(blocks[7])}</Text>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.cell} onPress={() => handlePress(8)}>
+            <Text style={styles.cellText}>{contentFor(blocks[8])}</Text>
+          </TouchableHighlight>
         </View>
       </View>
     </View>
@@ -64,26 +96,3 @@ const styles = StyleSheet.create({
   cell: { width: 80, height: 80, borderWidth: 1, borderColor: '#333', justifyContent: 'center', alignItems: 'center', margin: 4 },
   cellText: { fontSize: 32, fontWeight: 'bold' },
 });
-const [block1, setBlock1] = useState<number>(0);
-const [block2, setBlock2] = useState<number>(0);
-const [block3, setBlock3] = useState<number>(0);
-const [block4, setBlock4] = useState<number>(0);
-const [block5, setBlock5] = useState<number>(0);
-const [block6, setBlock6] = useState<number>(0);
-const [block7, setBlock7] = useState<number>(0);
-const [block8, setBlock8] = useState<number>(0);
-const [block9, setBlock9] = useState<number>(0);
-
-let block1Content: string;
-switch (block1) {
-  case 1: block1Content = 'X'; break;
-  case 2: block1Content = 'O'; break;
-  default: block1Content = '';
-}
-
-let block2Content: string;
-switch (block2) {
-  case 1: block2Content = 'X'; break;
-  case 2: block2Content = 'O'; break;
-  default: block2Content = '';
-}
