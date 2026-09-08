@@ -64,3 +64,26 @@ const styles = StyleSheet.create({
   cell: { width: 80, height: 80, borderWidth: 1, borderColor: '#333', justifyContent: 'center', alignItems: 'center', margin: 4 },
   cellText: { fontSize: 32, fontWeight: 'bold' },
 });
+const [block1, setBlock1] = useState<number>(0);
+const [block2, setBlock2] = useState<number>(0);
+const [block3, setBlock3] = useState<number>(0);
+const [block4, setBlock4] = useState<number>(0);
+const [block5, setBlock5] = useState<number>(0);
+const [block6, setBlock6] = useState<number>(0);
+const [block7, setBlock7] = useState<number>(0);
+const [block8, setBlock8] = useState<number>(0);
+const [block9, setBlock9] = useState<number>(0);
+
+let block1Content: string;
+switch (block1) {
+  case 1: block1Content = 'X'; break;
+  case 2: block1Content = 'O'; break;
+  default: block1Content = '';
+}
+
+let block2Content: string;
+switch (block2) {
+  case 1: block2Content = 'X'; break;
+  case 2: block2Content = 'O'; break;
+  default: block2Content = '';
+}
